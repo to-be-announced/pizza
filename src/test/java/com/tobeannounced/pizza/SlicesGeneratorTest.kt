@@ -19,6 +19,12 @@ class SlicesGeneratorTest {
     }
 
     @Test
+    fun shouldReturnZeroSlicesIfPizzaSizeIsBig() {
+        val element = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
+        assertEquals(emptyResults(), possibleSlices(Pizza(setOf(element), 1, 1), element, 100, 100))
+    }
+
+    @Test
     fun shouldReturnOneSliceIfPizzaContainsBothIngredients() {
         val mushroom = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
         val tomato = Piece(1, 0, PieceKind.TOMATO, assigned = false)
