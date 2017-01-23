@@ -10,7 +10,7 @@ class SolveTest {
     @Test
     fun shouldSolvePizza() {
         Assert.assertEquals(
-                emptySet<Set<Piece>>(),
-                solve(examplePizza))
+                15,
+                solve(examplePizza).map { it.size }.sum())
     }
 }
