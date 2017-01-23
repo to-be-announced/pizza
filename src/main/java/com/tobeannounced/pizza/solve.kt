@@ -1,9 +1,9 @@
 package com.tobeannounced.pizza
 
 fun solve(problem: PizzaProblem): Set<Set<Piece>> {
-    try{
+    try {
         return solve(problem.pizza, curryPizza(problem.params.min, problem.params.max)).best()
-    }catch (solution: Solution){
+    } catch (solution: Solution) {
         return solution.best
     }
 }
@@ -15,15 +15,15 @@ private fun List<Set<Set<Piece>>>.best(): Set<Set<Piece>> {
 private fun solve(pizza: Pizza,
                   possibleSlices: (Pizza, Piece) -> Set<Set<Piece>>,
                   currentSolutions: List<Set<Set<Piece>>> = listOf(emptySet())): List<Set<Set<Piece>>> {
-    if (pizza.isSolved()) {
-        val best = currentSolutions.best()
-        if (best.sumBy { it.size } == 42) {
-            throw Solution(best)
-        } else {
-            return currentSolutions
-        }
+    val best = currentSolutions.best()
+    if (best.sumBy { it.size } == 42) {
+        throw Solution(best)
     } else {
-        return solveUnsolved(pizza, possibleSlices, currentSolutions)
+        if (pizza.isSolved()) {
+            return currentSolutions
+        } else {
+            return solveUnsolved(pizza, possibleSlices, currentSolutions)
+        }
     }
 }
 
