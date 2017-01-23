@@ -45,13 +45,20 @@ class SlicesGeneratorTest {
     }
 
     @Test
-    fun shouldReturnTwoSlices_oneSmallAndOneBig() {
+    fun shouldReturnTwoSlices_oneSmallAndOneBig_forVerticalSlice() {
         val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
         val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
         assertEquals(setOf(setOf(p1, p2), setOf(p1, p2, p3)), possibleSlices(Pizza(setOf(p1, p2, p3), 1, 3), piece = p1, minNumberOfEachKind = 1, maxSliceSize = 3))
     }
 
+    @Test
+    fun shouldReturnTwoSlices_oneSmallAndOneBig_forHorizontalSlice() {
+        val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
+        val p2 = Piece(0, 1, PieceKind.TOMATO, assigned = false)
+        val p3 = Piece(0, 2, PieceKind.TOMATO, assigned = false)
+        assertEquals(setOf(setOf(p1, p2), setOf(p1, p2, p3)), possibleSlices(Pizza(setOf(p1, p2, p3), 1, 3), piece = p1, minNumberOfEachKind = 1, maxSliceSize = 3))
+    }
 
     private fun emptyResults() = emptySet<Set<Piece>>()
 }

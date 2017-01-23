@@ -15,7 +15,7 @@ private fun pieceFamily(maxSliceSize: Int, piece: Piece, pizza: Pizza): Set<Piec
 
 fun findNeighbours(pizza: Pizza, piece: Piece, deepth: Int): Set<Piece> {
     return if (deepth == 0) emptySet()
-    else pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 && it.c == 0 }
+    else pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 &&  Math.abs(it.c - piece.c) <= 1 }
             .filter { it != piece }
             .flatMap { setOf(it) + findNeighbours(pizza.copy(pieces = pizza.pieces.minus(piece)), it, deepth - 1) }
             .toSet()
