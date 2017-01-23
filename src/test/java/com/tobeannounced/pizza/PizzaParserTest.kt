@@ -65,5 +65,4 @@ class PizzaParserTest {
                 parsePizza(fileFromResources("small.in")))
     }
 
-    fun fileFromResources(name: String) = File((File::class as Any).javaClass.classLoader.getResource(name).file)
 }
