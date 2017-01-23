@@ -3,24 +3,24 @@ package com.tobeannounced.pizza
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class OutputTest {
+class PrintTest {
 
     @Test
-    fun shouldOutputResult() {
+    fun shouldPrintResult() {
         val solution = emptySet<Set<Pair<Int, Int>>>()
-        assertEquals("0", output(solution))
+        assertEquals("0", print(solution))
     }
 
     @Test
-    fun shouldOutputResultForSingleSlice() {
+    fun shouldPrintResultForSingleSlice() {
         val slice = setOf(0 to 0, 0 to 1)
         val solution = setOf(slice)
         assertEquals("1\n" +
-                "0 0 0 1", output(solution))
+                "0 0 0 1", print(solution))
     }
 
     @Test
-    fun shouldOutputResultForMultipleSlices() {
+    fun shouldPrintResultForMultipleSlices() {
         val slice1 = setOf(0 to 0, 0 to 1, 1 to 0, 1 to 1, 2 to 0, 2 to 1)
         val slice2 = setOf(0 to 2, 1 to 2, 2 to 2)
         val slice3 = setOf(0 to 3, 0 to 4, 1 to 3, 1 to 4, 2 to 3, 2 to 4)
@@ -28,6 +28,6 @@ class OutputTest {
         assertEquals("3\n" +
                 "0 0 2 1\n" +
                 "0 2 2 2\n" +
-                "0 3 2 4", output(solution))
+                "0 3 2 4", print(solution))
     }
 }
