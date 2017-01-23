@@ -14,7 +14,7 @@ fun findNeighbours(pizza: Pizza, piece: Piece, depth: Int): Set<Piece> {
     return if (depth == 0) emptySet()
     else pizza.pieces
             .filter { !it.assigned }
-            .filter { Math.pow(it.r - piece.r,2) <= 1 + Math.pow(it.c - piece.c,2) < 2 }
+            .filter { Math.pow(it.r - piece.r,2) + Math.pow(it.c - piece.c,2) < 2 }
             .filter { it != piece }
             .flatMap { setOf(it) + findNeighbours(pizza.copy(pieces = pizza.pieces.minus(piece)), it, depth - 1) }
             .toSet()
