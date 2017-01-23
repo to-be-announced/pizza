@@ -1,6 +1,8 @@
 package com.tobeannounced.pizza
 
-fun print(solution: Set<Set<Pair<Int, Int>>>) = buildString {
+fun Set<Set<Piece>>.toSlices() = map { it.map { it.cell }.toSet() }.toSet()
+
+fun outputFrom(solution: Set<Set<Pair<Int, Int>>>) = buildString {
     append(solution.count())
     solution.forEach { slice ->
         val rMin = slice.map { it.first }.min()
