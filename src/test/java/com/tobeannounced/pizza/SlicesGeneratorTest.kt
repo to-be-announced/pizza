@@ -68,7 +68,6 @@ class SlicesGeneratorTest {
     }
 
     @Test
-    @Ignore// it doesnt find these smaller one
     fun shouldFindSquaredSlice() {
         val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
         val p2 = Piece(0, 1, PieceKind.TOMATO, assigned = false)
