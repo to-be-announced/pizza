@@ -7,33 +7,30 @@ class ScoreTest {
 
     @Test
     fun shouldCalculateScoreWhenNoPieceIsAssigned() {
-        val pieces = listOf(
+        val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, false),
                 Piece(0, 1, PieceKind.TOMATO, false)
-        )
-        val score = calculateScore(Pizza(pieces, 2, 1, 1, 1))
+        ), 2, 1, 1, 1).score()
 
         assertEquals(0, score)
     }
 
     @Test
     fun shouldCalculateScoreWhenOnePieceIsAssigned() {
-        val pieces = listOf(
+        val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, true),
                 Piece(0, 1, PieceKind.TOMATO, false)
-        )
-        val score = calculateScore(Pizza(pieces, 2, 1, 1, 1))
+        ), 2, 1, 1, 1).score()
 
         assertEquals(1, score)
     }
 
     @Test
     fun shouldCalculateScoreWhenAllPiecesAreAssigned() {
-        val pieces = listOf(
+        val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, true),
                 Piece(0, 1, PieceKind.TOMATO, true)
-        )
-        val score = calculateScore(Pizza(pieces, 2, 1, 1, 1))
+        ), 2, 1, 1, 1).score()
 
         assertEquals(2, score)
     }
