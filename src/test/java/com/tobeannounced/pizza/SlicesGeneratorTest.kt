@@ -1,7 +1,6 @@
 package com.tobeannounced.pizza
 
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
 import org.junit.Test
 
 class SlicesGeneratorTest {
@@ -26,29 +25,31 @@ class SlicesGeneratorTest {
     }
 
     @Test
-    fun shouldReturnNeighbours() {
+    fun shouldReturnNearbyNeighbours() {
         val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
         val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
 
-        assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p1))
-        assertEquals(setOf(p1, p3), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p2))
-        assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p3))
-    }
-
-    private fun findNeighbours(pizza: Pizza, piece: Piece): Set<Piece> {
-        return pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 && it.c == 0 }
-                .filter { it != piece }
-                .toSet()
+        assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p1, deepth = 1))
+        assertEquals(setOf(p1, p3), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p2, deepth = 1))
+        assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p3, deepth = 1))
     }
 
     @Test
-    @Ignore
+    fun shouldReturnFarNeighbours() {
+        val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
+        val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
+        val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
+
+        assertEquals(setOf(p2,p3), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p1, deepth = 2))
+    }
+
+    @Test
     fun shouldReturnTwoSlices_oneSmallAndOneBig() {
         val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
         val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
-        assertEquals(setOf(setOf(p1, p2), setOf(p1, p2, p3)), possibleSlices(Pizza(setOf(p1, p2, p3), 1, 3), p1, 1, 3))
+        assertEquals(setOf(setOf(p1, p2), setOf(p1, p2, p3)), possibleSlices(Pizza(setOf(p1, p2, p3), 1, 3), piece = p1, minNumberOfEachKind = 1, maxSliceSize = 3))
     }
 
 
