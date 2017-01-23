@@ -10,7 +10,7 @@ class SolveTest {
     @Test
     fun shouldSolvePizza() {
         Assert.assertEquals(
-                15,
+                examplePizza.pizza.height * examplePizza.pizza.width,
                 solve(examplePizza).map { it.size }.sum())
     }
 }
