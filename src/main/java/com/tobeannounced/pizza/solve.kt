@@ -1,19 +1,33 @@
 package com.tobeannounced.pizza
 
 fun solve(problem: PizzaProblem): Set<Set<Piece>> {
-    return solve(problem.pizza, curryPizza(problem.params.min, problem.params.max))
-            .maxBy { it.sumBy { it.size } }!!
+    try{
+        return solve(problem.pizza, curryPizza(problem.params.min, problem.params.max)).best()
+    }catch (solution: Solution){
+        return solution.best
+    }
+}
+
+private fun List<Set<Set<Piece>>>.best(): Set<Set<Piece>> {
+    return this.maxBy { it.sumBy { it.size } }!!
 }
 
 private fun solve(pizza: Pizza,
                   possibleSlices: (Pizza, Piece) -> Set<Set<Piece>>,
                   currentSolutions: List<Set<Set<Piece>>> = listOf(emptySet())): List<Set<Set<Piece>>> {
     if (pizza.isSolved()) {
-        return currentSolutions
+        val best = currentSolutions.best()
+        if (best.sumBy { it.size } == 42) {
+            throw Solution(best)
+        } else {
+            return currentSolutions
+        }
     } else {
         return solveUnsolved(pizza, possibleSlices, currentSolutions)
     }
 }
+
+class Solution(val best: Set<Set<Piece>>) : Throwable()
 
 private fun solveUnsolved(pizza: Pizza, possibleSlices: (Pizza, Piece) -> Set<Set<Piece>>, currentSolutions: List<Set<Set<Piece>>>): List<Set<Set<Piece>>> {
     val piece = pizza.pieces.first { !it.assigned }
@@ -43,5 +57,6 @@ private fun curryPizza(minNumberOfEachKind: Int, maxSliceSize: Int): (Pizza, Pie
 }
 
 private fun Pizza.isSolved(): Boolean {
+    println(pieces.count { it.assigned })
     return pieces.all { it.assigned }
 }
