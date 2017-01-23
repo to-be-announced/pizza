@@ -32,6 +32,8 @@ class SlicesGeneratorTest {
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
 
         assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p1))
+        assertEquals(setOf(p1, p3), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p2))
+        assertEquals(setOf(p2), findNeighbours(Pizza(setOf(p1, p2, p3), width = 1, height = 3), p3))
     }
 
     private fun findNeighbours(pizza: Pizza, piece: Piece): Set<Piece> {
