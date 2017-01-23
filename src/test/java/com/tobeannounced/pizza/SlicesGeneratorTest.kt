@@ -1,6 +1,7 @@
 package com.tobeannounced.pizza
 
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 
 class SlicesGeneratorTest {
@@ -30,9 +31,9 @@ class SlicesGeneratorTest {
         val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
 
-        assertEquals(setOf(p2), findNeighbours(createPizza(p1, p2, p3), p1, deepth = 1))
-        assertEquals(setOf(p1, p3), findNeighbours(createPizza(p1, p2, p3), p2, deepth = 1))
-        assertEquals(setOf(p2), findNeighbours(createPizza(p1, p2, p3), p3, deepth = 1))
+        assertEquals(setOf(p2), findNeighbours(createPizza(p1, p2, p3), p1, depth = 1))
+        assertEquals(setOf(p1, p3), findNeighbours(createPizza(p1, p2, p3), p2, depth = 1))
+        assertEquals(setOf(p2), findNeighbours(createPizza(p1, p2, p3), p3, depth = 1))
     }
 
     @Test
@@ -41,7 +42,7 @@ class SlicesGeneratorTest {
         val p2 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
         val p3 = Piece(2, 0, PieceKind.TOMATO, assigned = false)
 
-        assertEquals(setOf(p2,p3), findNeighbours(createPizza(p1, p2, p3), p1, deepth = 2))
+        assertEquals(setOf(p2,p3), findNeighbours(createPizza(p1, p2, p3), p1, depth = 2))
     }
 
     @Test
@@ -60,7 +61,20 @@ class SlicesGeneratorTest {
         assertEquals(setOf(setOf(p1, p2), setOf(p1, p2, p3)), possibleSlices(createPizza(p1, p2, p3), piece = p1, minNumberOfEachKind = 1, maxSliceSize = 3))
     }
 
-    private fun createPizza(p1: Piece, p2: Piece, p3: Piece) = Pizza(setOf(p1, p2, p3), width = 1, height = 3)
+    @Test
+    @Ignore// it doesnt find these smaller one
+    fun shouldFindSquaredSlice() {
+        val p1 = Piece(0, 0, PieceKind.MUSHROOM, assigned = false)
+        val p2 = Piece(0, 1, PieceKind.TOMATO, assigned = false)
+        val p3 = Piece(1, 0, PieceKind.TOMATO, assigned = false)
+        val p4 = Piece(1, 1, PieceKind.TOMATO, assigned = false)
+        assertEquals(setOf(
+                setOf(p1, p2),
+                setOf(p1, p3),
+                setOf(p1, p2, p3, p4)), possibleSlices(createPizza(p1, p2, p3, p4), piece = p1, minNumberOfEachKind = 1, maxSliceSize = 4))
+    }
+
+    private fun createPizza(vararg pieces: Piece) = Pizza(setOf(*pieces), width = 1, height = 3)
 
     private fun emptyResults() = emptySet<Set<Piece>>()
 }

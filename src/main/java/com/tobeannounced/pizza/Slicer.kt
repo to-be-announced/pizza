@@ -4,19 +4,16 @@ fun possibleSlices(pizza: Pizza, piece: Piece, minNumberOfEachKind: Int, maxSlic
     if (maxSliceSize <= 1) {
         return emptySet()
     } else {
-        return (1..maxSliceSize).map { pieceFamily(it, piece, pizza) }.toSet()
+        return (1..maxSliceSize).map {
+            (findNeighbours(pizza, piece, depth = it) + piece)
+        }.toSet()
     }
 }
 
-private fun pieceFamily(maxSliceSize: Int, piece: Piece, pizza: Pizza): Set<Piece> {
-    val findNeighbours = findNeighbours(pizza, piece, maxSliceSize)
-    return findNeighbours + piece
-}
-
-fun findNeighbours(pizza: Pizza, piece: Piece, deepth: Int): Set<Piece> {
-    return if (deepth == 0) emptySet()
-    else pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 &&  Math.abs(it.c - piece.c) <= 1 }
+fun findNeighbours(pizza: Pizza, piece: Piece, depth: Int): Set<Piece> {
+    return if (depth == 0) emptySet()
+    else pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 && Math.abs(it.c - piece.c) <= 1 }
             .filter { it != piece }
-            .flatMap { setOf(it) + findNeighbours(pizza.copy(pieces = pizza.pieces.minus(piece)), it, deepth - 1) }
+            .flatMap { setOf(it) + findNeighbours(pizza.copy(pieces = pizza.pieces.minus(piece)), it, depth - 1) }
             .toSet()
 }
