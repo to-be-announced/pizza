@@ -10,7 +10,7 @@ class ScoreTest {
         val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, false),
                 Piece(0, 1, PieceKind.TOMATO, false)
-        ), 2, 1, 1, 1).score()
+        ), 2, 1).score()
 
         assertEquals(0, score)
     }
@@ -20,7 +20,7 @@ class ScoreTest {
         val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, true),
                 Piece(0, 1, PieceKind.TOMATO, false)
-        ), 2, 1, 1, 1).score()
+        ), 2, 1).score()
 
         assertEquals(1, score)
     }
@@ -30,7 +30,7 @@ class ScoreTest {
         val score = Pizza(listOf(
                 Piece(0, 0, PieceKind.MUSHROOM, true),
                 Piece(0, 1, PieceKind.TOMATO, true)
-        ), 2, 1, 1, 1).score()
+        ), 2, 1).score()
 
         assertEquals(2, score)
     }
