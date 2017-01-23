@@ -10,7 +10,7 @@ fun parsePizza(file: File): PizzaProblem {
             line.mapIndexed { c, char -> Piece(r, c, char.toKind(), false) }
         }.flatMap { it }
         PizzaProblem(
-                Pizza(pieces, pizzaParams[0].toInt(), pizzaParams[1].toInt()),
+                Pizza(pieces.toSet(), pizzaParams[0].toInt(), pizzaParams[1].toInt()),
                 ProblemParams(pizzaParams[2].toInt(), pizzaParams[3].toInt())
         )
     }
