@@ -1,7 +1,8 @@
 package com.tobeannounced.pizza
 
 fun solve(problem: PizzaProblem): Set<Set<Piece>> {
-    return solve(problem.pizza, curryPizza(problem.params.min, problem.params.max)).first()
+    return solve(problem.pizza, curryPizza(problem.params.min, problem.params.max))
+            .maxBy { it.sumBy { it.size } }!!
 }
 
 private fun solve(pizza: Pizza,
