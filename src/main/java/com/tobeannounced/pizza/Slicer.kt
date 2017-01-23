@@ -12,7 +12,9 @@ fun possibleSlices(pizza: Pizza, piece: Piece, minNumberOfEachKind: Int, maxSlic
 
 fun findNeighbours(pizza: Pizza, piece: Piece, depth: Int): Set<Piece> {
     return if (depth == 0) emptySet()
-    else pizza.pieces.filter { Math.abs(it.r - piece.r) <= 1 && Math.abs(it.c - piece.c) <= 1 }
+    else pizza.pieces
+            .filter { !it.assigned }
+            .filter { Math.abs(it.r - piece.r) <= 1 && Math.abs(it.c - piece.c) <= 1 }
             .filter { it != piece }
             .flatMap { setOf(it) + findNeighbours(pizza.copy(pieces = pizza.pieces.minus(piece)), it, depth - 1) }
             .toSet()
