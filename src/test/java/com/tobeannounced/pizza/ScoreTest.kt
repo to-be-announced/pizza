@@ -26,4 +26,15 @@ class ScoreTest {
 
         assertEquals(1, score)
     }
+
+    @Test
+    fun shouldCalculateScoreWhenAllPiecesAreAssigned() {
+        val pieces = listOf(
+                Piece(0, 0, PieceKind.MUSHROOM, true),
+                Piece(0, 1, PieceKind.TOMATO, true)
+        )
+        val score = calculateScore(Pizza(pieces, 2, 1, 1, 1))
+
+        assertEquals(2, score)
+    }
 }
