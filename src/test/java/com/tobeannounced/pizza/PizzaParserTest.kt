@@ -11,7 +11,7 @@ class PizzaParserTest {
         assertEquals(
                 PizzaProblem(
                         Pizza(
-                                listOf(
+                                setOf(
                                         Piece(0, 0, PieceKind.TOMATO, false),
                                         Piece(0, 1, PieceKind.MUSHROOM, false),
                                         Piece(0, 2, PieceKind.MUSHROOM, false),
