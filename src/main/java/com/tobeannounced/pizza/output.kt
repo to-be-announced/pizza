@@ -1,12 +1,12 @@
 package com.tobeannounced.pizza
 
-fun output(solution: Set<Set<Piece>>) = buildString {
+fun output(solution: Set<Set<Pair<Int, Int>>>) = buildString {
     append(solution.count())
     solution.forEach { slice ->
-        val rMin = slice.map { it.r }.min()
-        val rMax = slice.map { it.r }.max()
-        val cMin = slice.map { it.c }.min()
-        val cMax = slice.map { it.c }.max()
+        val rMin = slice.map { it.first }.min()
+        val rMax = slice.map { it.first }.max()
+        val cMin = slice.map { it.second }.min()
+        val cMax = slice.map { it.second }.max()
         append("\n$rMin $cMin $rMax $cMax")
     }
 }

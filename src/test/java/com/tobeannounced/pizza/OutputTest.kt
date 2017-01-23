@@ -7,15 +7,15 @@ class OutputTest {
 
     @Test
     fun shouldOutputResult() {
-        val solution = emptySet<Set<Piece>>()
+        val solution = emptySet<Set<Pair<Int, Int>>>()
         assertEquals("0", output(solution))
     }
 
     @Test
     fun shouldOutputResultForSingleSlice() {
         val solution = setOf(setOf(
-                Piece(0, 0, PieceKind.MUSHROOM, true),
-                Piece(0, 1, PieceKind.TOMATO, true)))
+                0 to 0,
+                0 to 1))
         assertEquals("1\n" +
                 "0 0 0 1", output(solution))
     }
