@@ -16,11 +16,11 @@ class SolveTest {
 
     @Test
     fun outSmall() {
-        println(outputFrom(solve(parsePizza(fileFromResources("small.in"))).toSlices()))
+        printSolutionFor(fileFromResources("small.in"))
     }
 
     @Test
     fun outExample() {
-        println(outputFrom(solve(parsePizza(fileFromResources("example.in"))).toSlices()))
+        printSolutionFor(fileFromResources("example.in"))
     }
 }
